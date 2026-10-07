@@ -1,0 +1,17 @@
+{
+  "name": "matryoshka-paradigms",
+  "owner": { "name": "Joseph McHenry" },
+  "metadata": {
+    "description": "Business Frameworks: operating judgement for businesses from launch to about $50M revenue, as a skill that reads a free layer and buys single nodes over x402 with the user's approval.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "business-frameworks",
+      "description": "Decision frameworks for value, cash flow, cost of capital and growth in a sub-$50M business. Free top layer; paid nodes $0.02–$0.05 over x402 (USDC on Base), paid only with the user's approval. No code, hooks or MCP servers.",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/business-frameworks"]
+    }
+  ]
+}
