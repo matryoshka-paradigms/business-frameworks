@@ -5,7 +5,7 @@ license: MIT for the files in this repository (this skill, its references, the m
 compatibility: Needs outbound HTTPS to business-frameworks.matryoshka-paradigms.workers.dev. The free layer needs nothing else. Paid calls need an x402 client and a wallet holding USDC on Base, both supplied and controlled by the user.
 metadata:
   author: Joseph McHenry
-  skill-version: "0.1.1"
+  skill-version: "0.1.2"
   product-version: "1.0"
   homepage: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
 ---
@@ -57,6 +57,8 @@ The live catalogue is the authority on handles, token counts and prices: `GET /c
 ## Payment rules
 
 Paid routes answer `402` with a `PAYMENT-REQUIRED` header (base64 JSON). The request is repeated with a `PAYMENT-SIGNATURE` header produced by the user's x402 client. No account, no API key.
+
+This skill never reads, holds or transmits a key. The signature is made inside the user's own payment tool — a wallet the user installed and controls, such as an x402 wallet MCP server — which asks the user before each payment; the skill only repeats the request with the header that tool returns.
 
 - **Approval first.** Pay only if the user has approved this call, or has set a standing limit that covers it. State the handle and the price before paying.
 - **Check the terms in the 402 before signing.** All four must hold; if any fails, do not pay and tell the user what differed:
