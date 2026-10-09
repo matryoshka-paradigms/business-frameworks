@@ -1,11 +1,26 @@
 {
   "name": "business-frameworks",
   "displayName": "Business Frameworks",
-  "version": "0.1.1",
+  "icon": "./.claude-plugin/icon.png",
+  "version": "0.1.2",
   "description": "Decision frameworks for value, cash flow, cost of capital and growth in a business under $50M revenue, by Joseph McHenry. Free top layer; paid nodes $0.02–$0.05 over x402 (USDC on Base), paid only with the user's approval. No code, hooks or MCP servers; one host.",
-  "author": { "name": "Joseph McHenry", "email": "matryoshka.paradigms@gmail.com", "url": "https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks" },
+  "author": {
+    "name": "Joseph McHenry",
+    "email": "matryoshka.paradigms@gmail.com",
+    "url": "https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks"
+  },
   "homepage": "https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks",
   "repository": "https://github.com/matryoshka-paradigms/business-frameworks",
   "license": "MIT",
-  "keywords": ["business", "finance", "cash-flow", "cost-of-capital", "valuation", "growth", "small-business", "decision-frameworks", "x402"]
+  "keywords": [
+    "business",
+    "finance",
+    "cash-flow",
+    "cost-of-capital",
+    "valuation",
+    "growth",
+    "small-business",
+    "decision-frameworks",
+    "x402"
+  ]
 }
