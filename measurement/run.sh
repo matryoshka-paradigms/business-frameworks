@@ -27,7 +27,13 @@ for QID in "${IDS[@]}"; do
   # Scrubbed environment: PATH/HOME and the proxy and certificate variables only, read by name.
   # No credential is forwarded; the nested Claude Code uses the login stored under HOME.
   # This drops the harness-level context a parent session would inherit (attached project, extra MCP tools).
-  KEEP=(); for v in HOME PATH HTTPS_PROXY HTTP_PROXY NO_PROXY https_proxy http_proxy no_proxy NODE_EXTRA_CA_CERTS SSL_CERT_FILE REQUESTS_CA_BUNDLE CURL_CA_BUNDLE ANTHROPIC_BASE_URL TERM LANG; do [ -n "${!v:-}" ] && KEEP+=("$v=${!v}"); done
+  KEEP=()
+  [ -n "${HOME:-}" ] && KEEP+=("HOME=$HOME"); [ -n "${PATH:-}" ] && KEEP+=("PATH=$PATH")
+  [ -n "${HTTPS_PROXY:-}" ] && KEEP+=("HTTPS_PROXY=$HTTPS_PROXY"); [ -n "${HTTP_PROXY:-}" ] && KEEP+=("HTTP_PROXY=$HTTP_PROXY"); [ -n "${NO_PROXY:-}" ] && KEEP+=("NO_PROXY=$NO_PROXY")
+  [ -n "${https_proxy:-}" ] && KEEP+=("https_proxy=$https_proxy"); [ -n "${http_proxy:-}" ] && KEEP+=("http_proxy=$http_proxy"); [ -n "${no_proxy:-}" ] && KEEP+=("no_proxy=$no_proxy")
+  [ -n "${NODE_EXTRA_CA_CERTS:-}" ] && KEEP+=("NODE_EXTRA_CA_CERTS=$NODE_EXTRA_CA_CERTS"); [ -n "${SSL_CERT_FILE:-}" ] && KEEP+=("SSL_CERT_FILE=$SSL_CERT_FILE")
+  [ -n "${REQUESTS_CA_BUNDLE:-}" ] && KEEP+=("REQUESTS_CA_BUNDLE=$REQUESTS_CA_BUNDLE"); [ -n "${CURL_CA_BUNDLE:-}" ] && KEEP+=("CURL_CA_BUNDLE=$CURL_CA_BUNDLE")
+  [ -n "${ANTHROPIC_BASE_URL:-}" ] && KEEP+=("ANTHROPIC_BASE_URL=$ANTHROPIC_BASE_URL"); [ -n "${TERM:-}" ] && KEEP+=("TERM=$TERM"); [ -n "${LANG:-}" ] && KEEP+=("LANG=$LANG")
   ( cd "$WD" && timeout 600 env -i "${KEEP[@]}" claude "${ARGS[@]}" > "$OUT/$QID.jsonl" 2> "$OUT/$QID.err" ) || echo "  non-zero exit for $QID (see $OUT/$QID.err)"
   rm -rf "$WD"
   python3 "$HERE/summarize_run.py" "$OUT/$QID.jsonl"

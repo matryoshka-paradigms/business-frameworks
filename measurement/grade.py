@@ -7,8 +7,19 @@ import json, os, subprocess, sys, glob, tempfile
 from summarize_run import parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ENV_KEEP = ("HOME", "PATH", "HTTPS_PROXY", "HTTP_PROXY", "NO_PROXY", "https_proxy", "http_proxy", "no_proxy",
-            "NODE_EXTRA_CA_CERTS", "SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE", "ANTHROPIC_BASE_URL", "TERM", "LANG")
+
+def scrubbed_env():
+    """Path, home, proxy and certificate settings only, each read by its literal name. No credential is forwarded;
+    the nested Claude Code uses the login stored under HOME."""
+    pairs = (
+        ("HOME", os.environ.get("HOME")), ("PATH", os.environ.get("PATH")),
+        ("HTTPS_PROXY", os.environ.get("HTTPS_PROXY")), ("HTTP_PROXY", os.environ.get("HTTP_PROXY")), ("NO_PROXY", os.environ.get("NO_PROXY")),
+        ("https_proxy", os.environ.get("https_proxy")), ("http_proxy", os.environ.get("http_proxy")), ("no_proxy", os.environ.get("no_proxy")),
+        ("NODE_EXTRA_CA_CERTS", os.environ.get("NODE_EXTRA_CA_CERTS")), ("SSL_CERT_FILE", os.environ.get("SSL_CERT_FILE")),
+        ("REQUESTS_CA_BUNDLE", os.environ.get("REQUESTS_CA_BUNDLE")), ("CURL_CA_BUNDLE", os.environ.get("CURL_CA_BUNDLE")),
+        ("ANTHROPIC_BASE_URL", os.environ.get("ANTHROPIC_BASE_URL")), ("TERM", os.environ.get("TERM")), ("LANG", os.environ.get("LANG")),
+    )
+    return {name: value for name, value in pairs if value}
 GRADER = "sonnet"
 if "--grader" in sys.argv:
     GRADER = sys.argv[sys.argv.index("--grader") + 1]
@@ -26,9 +37,7 @@ Return ONLY a JSON object with these keys:
 def grade_one(q, answer):
     prompt = (RUBRIC + "\n\nQUESTION:\n" + q["question"] + "\n\nANSWER KEY (kind: " + q["kind"] + "):\n" + q["key"]
               + "\n\nANSWER TO GRADE:\n" + (answer or "(empty)") + "\n\nJSON:")
-    # The grader runs in a scrubbed environment: path, home, proxy and certificate settings only, read by name.
-    # No credential is forwarded; the nested Claude Code uses the login stored under HOME.
-    keep = {k: os.environ.get(k) for k in ENV_KEEP if os.environ.get(k)}
+    keep = scrubbed_env()
     with tempfile.TemporaryDirectory() as wd:
         out = subprocess.run(["claude", "-p", prompt, "--model", GRADER, "--output-format", "json", "--max-turns", "1",
                               "--no-session-persistence", "--setting-sources", "project", "--disallowedTools", "Projects", "Bash", "WebSearch", "WebFetch", "Read", "Glob", "Grep"],
