@@ -13,7 +13,7 @@ Operating judgement for running a business from launch to about $50M in revenue,
 |---|---|
 | `skills/business-frameworks/SKILL.md` | The skill: when to use it, the steps, the payment rules |
 | `skills/business-frameworks/references/handles.md` | Handles, token counts and prices copied from the catalogue |
-| `.claude-plugin/marketplace.json` | Lets Claude Code install the skill as a plugin |
+| `.claude-plugin/marketplace.json`, `plugin.json`, `icon.png` | Let Claude Code and the Claude plugin directory install the skill as a plugin; the icon is the listing's |
 | `LICENSE.md` | MIT for the files in this repository; the free layer CC BY-ND 4.0; paid node text all rights reserved |
 | `OVERVIEW.md` | Why an agent should use the nodes, in compute terms, with the measured table |
 | `measurement/` | The with-and-without measurement: method, questions, runner, results (answer keys withheld; they restate paid rules) |
@@ -34,7 +34,7 @@ Six nodes are free. Twenty-six deeper nodes cost $0.02 to $0.05 each, and each o
 
 1. Read `SKILL.md`. It is the whole skill.
 2. Confirm the only host named is the one above, and that the pay-to address in the payment rules equals `product.pay_to` in the live catalogue.
-3. Pin a tagged release (`v0.1.1`) if you want the text you reviewed to be the text that runs.
+3. Pin a tagged release (`v0.1.2`) if you want the text you reviewed to be the text that runs.
 4. The skill ships no code. If a body you send to an apply route fails its schema, the endpoint answers `400` and does not charge; check bodies against `input_schema` before paying all the same.
 
 ## Limits
