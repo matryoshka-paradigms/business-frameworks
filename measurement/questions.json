@@ -1,0 +1,122 @@
+[
+ {
+  "id": "q01",
+  "kind": "qualitative",
+  "decision": "value/decide/reinvest-or-distribute",
+  "question": "We have $300k sitting in the business account. Put it into a second location or pay it out to the owners?"
+ },
+ {
+  "id": "q02",
+  "kind": "qualitative",
+  "decision": "cash-flow/decide/runway",
+  "question": "My client's shop made a profit last year and still couldn't make payroll in March. Why?"
+ },
+ {
+  "id": "q03",
+  "kind": "qualitative",
+  "decision": "risk/decide/hurdle",
+  "question": "What discount rate should I use for a $3M-revenue family manufacturing business?"
+ },
+ {
+  "id": "q04",
+  "kind": "qualitative",
+  "decision": "risk/decide/concentration",
+  "question": "One customer is 45% of our sales. How worried should we be and what do we do first?"
+ },
+ {
+  "id": "q05",
+  "kind": "qualitative",
+  "decision": "growth/decide/pace",
+  "question": "We want to grow 40% next year. Can we fund that ourselves?"
+ },
+ {
+  "id": "q06",
+  "kind": "qualitative",
+  "decision": "growth/decide/price",
+  "question": "How should a small manufacturer price a product against a cheaper competitor?"
+ },
+ {
+  "id": "q07",
+  "kind": "qualitative",
+  "decision": "cash-flow/decide/owner-pay",
+  "question": "The owner works 60 hours a week and the tax return shows $90k profit. Is this business actually making money?"
+ },
+ {
+  "id": "q08",
+  "kind": "qualitative",
+  "decision": "growth/decide/adjacency",
+  "question": "We've been offered a company in an unrelated industry. How should a $30M business decide?"
+ },
+ {
+  "id": "q09",
+  "kind": "numeric",
+  "decision": "cash-flow/decide/runway",
+  "question": "Twelve-week cash forecast: opening cash $120k; one bad month of collections is $60k; week 1 inflows $40k, must-pay $25k, deferrable $10k; week 2 inflows $30k, must-pay $55k, deferrable $20k; week 3 inflows $45k, must-pay $20k, deferrable $30k; week 4 inflows $35k, must-pay $70k, deferrable $5k. Where do we breach and what do we cut first?"
+ },
+ {
+  "id": "q10",
+  "kind": "qualitative",
+  "decision": "value/decide/build-or-run-for-cash",
+  "question": "Is it worth building this business to sell, or should I just run it for income?"
+ },
+ {
+  "id": "n01",
+  "kind": "numeric",
+  "decision": "value/decide/reinvest-or-distribute",
+  "question": "Our hurdle rate r is 12%. We have $900,000 in cash and want to hold $350,000 as a runway target. Four possible uses: a second-shift crew, $90,000 at an expected 55% return; a five-axis mill, $280,000 at 35%; a scheduling-system replacement, $150,000 at 18%; a front-office rebuild, $120,000 at 9%. Revenue is $9M. What should we fund, what do we hold, and what do we distribute?"
+ },
+ {
+  "id": "n02",
+  "kind": "numeric",
+  "decision": "cash-flow/decide/cash-cycle",
+  "question": "Receivables are 75 days, inventory 20 days, supplier credit 30 days. Cost of sales is 55 cents per sales dollar and operating expense 33 cents. What is our cash cycle telling us and which lever do we pull first?"
+ },
+ {
+  "id": "n03",
+  "kind": "numeric",
+  "decision": "cash-flow/decide/runway",
+  "question": "Six-month cash forecast for a $3.1M business: opening cash $210,000; one bad month of collections is $180,000. Month 1: inflows $250,000, must-pay $190,000, deferrable $30,000. Month 2: 240,000 / 200,000 / 40,000. Month 3: 200,000 / 210,000 / 60,000. Month 4: 230,000 / 205,000 / 20,000. Month 5: 220,000 / 380,000 / 10,000. Month 6: 260,000 / 200,000 / 20,000. Where do we breach and what do we do first?"
+ },
+ {
+  "id": "n04",
+  "kind": "numeric",
+  "decision": "cash-flow/decide/owner-pay",
+  "question": "The owner works 2,200 hours a year; the market wage for that work is $42 an hour. Reported cash flow is $131,000 and the owner took $125,000 in distributions. Is the business making money?"
+ },
+ {
+  "id": "n05",
+  "kind": "numeric",
+  "decision": "risk/decide/hurdle",
+  "question": "Set our hurdle rate. The long government bond yield is 4.6%. Unlevered betas of three comparable public companies are 0.9, 1.1 and 1.3. Revenue is $12M, the owner is diversified, and the market premium we use is 6 points."
+ },
+ {
+  "id": "n06",
+  "kind": "numeric",
+  "decision": "risk/decide/concentration",
+  "question": "Our largest customer is 24% of sales and our largest supplier provides 58% of our inputs. No function depends on the owner alone. Which of these is a risk we should price, and what do we do first?"
+ },
+ {
+  "id": "n07",
+  "kind": "numeric",
+  "decision": "growth/decide/pace",
+  "question": "We plan 28% growth next year. Our hurdle rate is 11.5% and our self-financeable growth ceiling is 13%. Outside capital is available: it would return 10% and cost 12.5%. Should we raise the money?"
+ },
+ {
+  "id": "n08",
+  "kind": "numeric",
+  "decision": "growth/decide/price",
+  "question": "Our competitor sells at $480 (the customer's reference price). Our incremental cost is $310. Three segments value our product differently: food-grade plants +$140 over the reference, general manufacturing +$20, commodity resale −$190. Where should we price, and which segments can we serve?"
+ },
+ {
+  "id": "n09",
+  "kind": "numeric",
+  "decision": "growth/decide/adjacency",
+  "question": "We are a $35M commercial electrical contractor considering acquiring a residential solar installer in another state. The core is not at risk, we could be top-three in that market, it is the only move under way, and we have written a stop condition. It would not reuse our customers, channels or capabilities. Should we proceed?"
+ },
+ {
+  "id": "n10",
+  "kind": "numeric",
+  "decision": "value/decide/build-or-run-for-cash",
+  "question": "Our position is not durable. Revenue that happens without the founder is 15% of sales; repeating revenue is 20%, down from 25% last quarter. Build this to sell, or run it for cash?"
+ }
+]
