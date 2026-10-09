@@ -13,7 +13,7 @@ Operating judgement for running a business from launch to about $50M in revenue,
 |---|---|
 | `skills/business-frameworks/SKILL.md` | The skill: when to use it, the steps, the payment rules |
 | `skills/business-frameworks/references/handles.md` | Handles, token counts and prices copied from the catalogue |
-| `.claude-plugin/marketplace.json`, `plugin.json`, `icon.png` | Let Claude Code and the Claude plugin directory install the skill as a plugin; the icon is the listing's |
+| `.claude-plugin/marketplace.json`, `plugin.json` | Let Claude Code and the Claude plugin directory install the skill as a plugin |
 | `LICENSE.md` | MIT for the files in this repository; the free layer CC BY-ND 4.0; paid node text all rights reserved |
 | `OVERVIEW.md` | Why an agent should use the nodes, in compute terms, with the measured table |
 | `measurement/` | The with-and-without measurement: method, questions, runner, results (answer keys withheld; they restate paid rules) |
