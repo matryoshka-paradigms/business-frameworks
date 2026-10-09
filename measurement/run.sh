@@ -24,17 +24,9 @@ for QID in "${IDS[@]}"; do
   if [ "$COND" = "paid" ]; then ARGS+=(--plugin-dir "$HERE/plugin-paid" --append-system-prompt "For any question about running a business — value, cash flow, cost of capital, growth, pricing, a specific business decision — load and follow the business-frameworks skill before answering."); fi
   if [ "$COND" = "forced" ]; then ARGS+=(--plugin-dir "$PLUGIN" --append-system-prompt "For any question about running a business — value, cash flow, cost of capital, growth, pricing, a specific business decision — load and follow the business-frameworks skill before answering."); fi
   echo "run $MODEL/$COND/$QID"
-  # Scrubbed environment: PATH/HOME and the proxy and certificate variables only, read by name.
-  # No credential is forwarded; the nested Claude Code uses the login stored under HOME.
-  # This drops the harness-level context a parent session would inherit (attached project, extra MCP tools).
-  KEEP=()
-  [ -n "${HOME:-}" ] && KEEP+=("HOME=$HOME"); [ -n "${PATH:-}" ] && KEEP+=("PATH=$PATH")
-  [ -n "${HTTPS_PROXY:-}" ] && KEEP+=("HTTPS_PROXY=$HTTPS_PROXY"); [ -n "${HTTP_PROXY:-}" ] && KEEP+=("HTTP_PROXY=$HTTP_PROXY"); [ -n "${NO_PROXY:-}" ] && KEEP+=("NO_PROXY=$NO_PROXY")
-  [ -n "${https_proxy:-}" ] && KEEP+=("https_proxy=$https_proxy"); [ -n "${http_proxy:-}" ] && KEEP+=("http_proxy=$http_proxy"); [ -n "${no_proxy:-}" ] && KEEP+=("no_proxy=$no_proxy")
-  [ -n "${NODE_EXTRA_CA_CERTS:-}" ] && KEEP+=("NODE_EXTRA_CA_CERTS=$NODE_EXTRA_CA_CERTS"); [ -n "${SSL_CERT_FILE:-}" ] && KEEP+=("SSL_CERT_FILE=$SSL_CERT_FILE")
-  [ -n "${REQUESTS_CA_BUNDLE:-}" ] && KEEP+=("REQUESTS_CA_BUNDLE=$REQUESTS_CA_BUNDLE"); [ -n "${CURL_CA_BUNDLE:-}" ] && KEEP+=("CURL_CA_BUNDLE=$CURL_CA_BUNDLE")
-  [ -n "${ANTHROPIC_BASE_URL:-}" ] && KEEP+=("ANTHROPIC_BASE_URL=$ANTHROPIC_BASE_URL"); [ -n "${TERM:-}" ] && KEEP+=("TERM=$TERM"); [ -n "${LANG:-}" ] && KEEP+=("LANG=$LANG")
-  ( cd "$WD" && timeout 600 env -i "${KEEP[@]}" claude "${ARGS[@]}" > "$OUT/$QID.jsonl" 2> "$OUT/$QID.err" ) || echo "  non-zero exit for $QID (see $OUT/$QID.err)"
+  # The nested Claude Code inherits this shell's environment unchanged and starts in an empty directory. Run this script
+  # from a plain shell, not from inside a Claude Code session, so that it inherits no parent context.
+  ( cd "$WD" && timeout 600 claude "${ARGS[@]}" > "$OUT/$QID.jsonl" 2> "$OUT/$QID.err" ) || echo "  non-zero exit for $QID (see $OUT/$QID.err)"
   rm -rf "$WD"
   python3 "$HERE/summarize_run.py" "$OUT/$QID.jsonl"
 done
