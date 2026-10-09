@@ -24,9 +24,10 @@ for QID in "${IDS[@]}"; do
   if [ "$COND" = "paid" ]; then ARGS+=(--plugin-dir "$HERE/plugin-paid" --append-system-prompt "For any question about running a business — value, cash flow, cost of capital, growth, pricing, a specific business decision — load and follow the business-frameworks skill before answering."); fi
   if [ "$COND" = "forced" ]; then ARGS+=(--plugin-dir "$PLUGIN" --append-system-prompt "For any question about running a business — value, cash flow, cost of capital, growth, pricing, a specific business decision — load and follow the business-frameworks skill before answering."); fi
   echo "run $MODEL/$COND/$QID"
-  # Scrubbed environment: only PATH/HOME, the proxy and certificate variables, and any credential variable.
+  # Scrubbed environment: PATH/HOME and the proxy and certificate variables only, read by name.
+  # No credential is forwarded; the nested Claude Code uses the login stored under HOME.
   # This drops the harness-level context a parent session would inherit (attached project, extra MCP tools).
-  KEEP=(); for v in HOME PATH HTTPS_PROXY HTTP_PROXY NO_PROXY https_proxy http_proxy no_proxy NODE_EXTRA_CA_CERTS SSL_CERT_FILE REQUESTS_CA_BUNDLE CURL_CA_BUNDLE ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN TERM LANG; do [ -n "${!v:-}" ] && KEEP+=("$v=${!v}"); done
+  KEEP=(); for v in HOME PATH HTTPS_PROXY HTTP_PROXY NO_PROXY https_proxy http_proxy no_proxy NODE_EXTRA_CA_CERTS SSL_CERT_FILE REQUESTS_CA_BUNDLE CURL_CA_BUNDLE ANTHROPIC_BASE_URL TERM LANG; do [ -n "${!v:-}" ] && KEEP+=("$v=${!v}"); done
   ( cd "$WD" && timeout 600 env -i "${KEEP[@]}" claude "${ARGS[@]}" > "$OUT/$QID.jsonl" 2> "$OUT/$QID.err" ) || echo "  non-zero exit for $QID (see $OUT/$QID.err)"
   rm -rf "$WD"
   python3 "$HERE/summarize_run.py" "$OUT/$QID.jsonl"

@@ -7,6 +7,8 @@ import json, os, subprocess, sys, glob, tempfile
 from summarize_run import parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ENV_KEEP = ("HOME", "PATH", "HTTPS_PROXY", "HTTP_PROXY", "NO_PROXY", "https_proxy", "http_proxy", "no_proxy",
+            "NODE_EXTRA_CA_CERTS", "SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE", "ANTHROPIC_BASE_URL", "TERM", "LANG")
 GRADER = "sonnet"
 if "--grader" in sys.argv:
     GRADER = sys.argv[sys.argv.index("--grader") + 1]
@@ -24,7 +26,9 @@ Return ONLY a JSON object with these keys:
 def grade_one(q, answer):
     prompt = (RUBRIC + "\n\nQUESTION:\n" + q["question"] + "\n\nANSWER KEY (kind: " + q["kind"] + "):\n" + q["key"]
               + "\n\nANSWER TO GRADE:\n" + (answer or "(empty)") + "\n\nJSON:")
-    keep = {k: v for k, v in os.environ.items() if k in ("HOME", "PATH", "HTTPS_PROXY", "HTTP_PROXY", "NO_PROXY", "https_proxy", "http_proxy", "no_proxy", "NODE_EXTRA_CA_CERTS", "SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE", "ANTHROPIC_BASE_URL", "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_API_KEY", "CLAUDE_CODE_OAUTH_TOKEN", "TERM", "LANG")}
+    # The grader runs in a scrubbed environment: path, home, proxy and certificate settings only, read by name.
+    # No credential is forwarded; the nested Claude Code uses the login stored under HOME.
+    keep = {k: os.environ.get(k) for k in ENV_KEEP if os.environ.get(k)}
     with tempfile.TemporaryDirectory() as wd:
         out = subprocess.run(["claude", "-p", prompt, "--model", GRADER, "--output-format", "json", "--max-turns", "1",
                               "--no-session-persistence", "--setting-sources", "project", "--disallowedTools", "Projects", "Bash", "WebSearch", "WebFetch", "Read", "Glob", "Grep"],
