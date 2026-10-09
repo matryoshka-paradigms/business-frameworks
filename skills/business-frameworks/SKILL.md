@@ -1,11 +1,11 @@
 ---
 name: business-frameworks
-description: Operating judgement for a business from launch to about $50M revenue, as short versioned decision frameworks built on V = CF/(r − g). Use when the user runs or advises a small or mid-sized business and has to decide something about value, cash flow, cost of capital or growth — reinvest or distribute, owner pay, the cash cycle, runway, a hurdle rate, customer or supplier concentration, growth pace, a price, an adjacency or acquisition. The top layer is free. Deeper nodes, and decisions applied to the user's own numbers, cost $0.02–$0.05 each over x402 (USDC on Base) and need the user's approval before any payment. Not for legal, tax or investment advice, and not for businesses above $50M revenue.
+description: Operating judgement for a business from launch to about $50M revenue, as short versioned decision frameworks built on V = CF/(r − g). Use when the user runs or advises a small or mid-sized business and has to decide something about value, cash flow, cost of capital or growth — reinvest or distribute, owner pay, the cash cycle, runway, a hurdle rate, customer or supplier concentration, growth pace, a price, an adjacency or acquisition. Use it even when the question already supplies the figures — what it adds is the rule, not the arithmetic. The top layer is free. Deeper nodes, and decisions applied to the user's own numbers, cost $0.02–$0.05 each over x402 (USDC on Base) and need the user's approval before any payment. Not for legal, tax or investment advice, and not for businesses above $50M revenue.
 license: MIT for the files in this repository (this skill, its references, the manifest and the README); free-layer text quoted from the dataset card CC-BY-ND-4.0; paid node text all rights reserved (see LICENSE.md)
 compatibility: Needs outbound HTTPS to business-frameworks.matryoshka-paradigms.workers.dev. The free layer needs nothing else. Paid calls need an x402 client and a wallet holding USDC on Base, both supplied and controlled by the user.
 metadata:
   author: Joseph McHenry
-  skill-version: "0.1"
+  skill-version: "0.1.1"
   product-version: "1.0"
   homepage: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
 ---
@@ -37,6 +37,7 @@ The live catalogue is the authority on handles, token counts and prices: `GET /c
 4. **If the user has numbers and the question is one of the ten decisions, use the apply route.** `GET /apply/<decision-path>` returns the input schema and an example input, free. Build the body from the user's figures, check it against the schema yourself, then `POST` it.
 5. **Before any paid call, follow the payment rules below.**
 6. **Answer with the handle.** Cite `business-frameworks/<path>@<version>` beside each point you take from a node, pass on the node's own citations, and say which calls were paid and what was spent.
+7. **Say what the framework does not supply.** A bond yield, a beta, a premium you chose, a threshold the node does not state: label it as your own input or assumption and name the kind of source. Never present your own figure as the framework's.
 
 | The user asks | Go to | Kind |
 |---|---|---|
@@ -86,3 +87,4 @@ Paid routes answer `402` with a `PAYMENT-REQUIRED` header (base64 JSON). The req
 - Not legal, tax or investment advice.
 - Send figures only. The rules do not use company names or personal data, so leave them out of request bodies.
 - If the endpoint is unreachable or a response does not match the shapes above, say so and work from the free layer on the dataset card: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
+- Small models load this skill unprompted on about one in five questions in scope (measured 2026-10-08; frontier models about three in four). Operators who want it used should pin it with one line in CLAUDE.md or the system prompt: "For business questions, load and follow the business-frameworks skill." What the nodes change, measured: `OVERVIEW.md` in the repository.
