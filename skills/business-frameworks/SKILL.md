@@ -5,7 +5,7 @@ license: MIT for the files in this repository (this skill, its references, the m
 compatibility: Needs outbound HTTPS to business-frameworks.matryoshka-paradigms.workers.dev. The free layer needs nothing else. Paid calls need an x402 client and a wallet holding USDC on Base, both supplied and controlled by the user.
 metadata:
   author: Joseph McHenry
-  skill-version: "0.1.2"
+  skill-version: "0.1.3"
   product-version: "1.0"
   homepage: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
 ---
@@ -35,9 +35,10 @@ The live catalogue is the authority on handles, token counts and prices: `GET /c
 2. **Place the business in a scale band** by annual revenue: sub-$1M, $1–5M, $5–25M, $25–50M. If revenue is unknown, ask. Above $50M, say the document is out of scope.
 3. **Pick the smallest descent** that answers the question (table below). One node is the normal purchase. Do not buy a branch.
 4. **If the user has numbers and the question is one of the ten decisions, use the apply route.** `GET /apply/<decision-path>` returns the input schema and an example input, free. Build the body from the user's figures, check it against the schema yourself, then `POST` it.
-5. **Before any paid call, follow the payment rules below.**
-6. **Answer with the handle.** Cite `business-frameworks/<path>@<version>` beside each point you take from a node, pass on the node's own citations, and say which calls were paid and what was spent.
-7. **Say what the framework does not supply.** A bond yield, a beta, a premium you chose, a threshold the node does not state: label it as your own input or assumption and name the kind of source. Never present your own figure as the framework's.
+5. **Before paying, ask what the node does for this kind of question.** `GET /fit?decision=<decision-path>&model=<the model you are running>` is free. It returns the measured record for the question's kind — how often the rule was stated with no framework, with the free layer and with the node, the cost per answer and per rule-right answer by model, the recommended path — and one verdict: `use` (buy the node), `apply` (the text does not lift this kind of question; the applied route computes it), `unproven` (no lift shown for your model class at the sample size — say so and let the user decide), `not_measured` (no figure for your model), `skip`. The same block sits in every 402 body and in the free apply schema. The figures are a pilot (one run per question, 2026-10-08) and say so.
+6. **Before any paid call, follow the payment rules below.**
+7. **Answer with the handle.** Cite `business-frameworks/<path>@<version>` beside each point you take from a node, pass on the node's own citations, and say which calls were paid and what was spent.
+8. **Say what the framework does not supply.** A bond yield, a beta, a premium you chose, a threshold the node does not state: label it as your own input or assumption and name the kind of source. Never present your own figure as the framework's.
 
 | The user asks | Go to | Kind |
 |---|---|---|
@@ -72,8 +73,9 @@ This skill never reads, holds or transmits a key. The signature is made inside t
 
 ## Shapes
 
-- Node: `GET /node/<path>` → `{handle, title, layer, tokens, text, cites[], children[], ...}`.
-- Apply schema (free): `GET /apply/<decision-path>` → `{handle, summary, price_usd, input_schema, example_input, ...}`.
+- Node: `GET /node/<path>` → `{handle, title, layer, tokens, text, cites[], children[], ...}`. A paid node's `402` carries a JSON body: `handle`, `price_usd`, `payment` (the terms), `how_to_pay`, `fit`; `HEAD` on a paid route also answers `402`. The versioned spelling `/node/<path>@1.0` is a paid route of its own.
+- Fit (free): `GET /fit` → the table; `GET /fit?decision=<decision-path>&model=<name>` → the block for one decision with the verdict for that model.
+- Apply schema (free): `GET /apply/<decision-path>` → `{handle, summary, price_usd, input_schema, example_input, fit, ...}`. An unpaid `POST` with a body answers `402` with `body_check` — whether that body would be accepted — so a bad body is found before anything is paid.
 - Applied decision (paid): `POST /apply/<decision-path>` with a JSON body → `{handle, applied: {figures, verdict, action[], check, basis[]}, node: {text, cites[]}}`. The rule is applied exactly as the node states it; no model sits between the inputs and the answer, so the same inputs give the same result.
 
 ## Using what comes back
@@ -88,5 +90,7 @@ This skill never reads, holds or transmits a key. The signature is made inside t
 - Scope is launch to about $50M revenue. The equation ranks decisions; it does not produce a valuation without a forecast (`growth/forecast`, `cash-flow/pro-forma`).
 - Not legal, tax or investment advice.
 - Send figures only. The rules do not use company names or personal data, so leave them out of request bodies.
+- What the endpoint records: the endpoint keeps a request log: time, method, path, status, duration, user agent, whether a payment header was present, and the payer address and transaction when a call settles — never an IP address, a request body, an applied decision's inputs, or a query string.
 - If the endpoint is unreachable or a response does not match the shapes above, say so and work from the free layer on the dataset card: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
+- The endpoint also serves the same nodes as an MCP server at `/mcp` (four tools; payment inside the tool call), machine-readable descriptions at `/llms.txt`, `/.well-known/x402` and `/openapi.json`. Nothing here needs any of them; they are for clients that prefer them.
 - Small models load this skill unprompted on about one in five questions in scope (measured 2026-10-08; frontier models about three in four). Operators who want it used should pin it with one line in CLAUDE.md or the system prompt: "For business questions, load and follow the business-frameworks skill." What the nodes change, measured: `OVERVIEW.md` in the repository.
