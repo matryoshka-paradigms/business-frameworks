@@ -49,10 +49,14 @@ Twenty questions in scope (eleven with figures, nine without), each answered in 
 
 Three things the table says plainly. The rule is in the paid nodes: the free layer frames the question and gets the small model to 50%; the node text takes it to 75%. A standing instruction matters: left to itself, the small model loaded the skill on one question in five, the frontier model on three in four. And the small model with the node beats the frontier model without it on rule, citation and cost — spending more calls and context to do it.
 
+## Before you pay: ask the endpoint what the node does for your question
+
+`GET /fit?decision=<decision-path>&model=<your model>` is free and answers from the table above, by kind of question. For screens and thresholds (hurdle, concentration, adjacency, pace, owner pay, build or run) the recommended path is a small model with the node: 12 of 12 rule-right on those questions at $0.0047 per rule-right answer, against a frontier model alone at $0.435 and a frontier model with the node at $0.181 — and no difference in rule-right rate between the small model with the node and the frontier model with the node that this sample could detect (15 of 20 against 5 of 8, p = 0.65). For the four decisions that are arithmetic over periods (runway, cash cycle, reinvest or distribute, price) the text lifted neither model's answers; the recommended path is the applied route, which computes the verdict. Every figure carries its n and date and is labelled a pilot until the comparison test replaces it; the verdict says `unproven` or `not_measured` where that is the truth.
+
 ## Use it in three calls
 
 1. `GET https://business-frameworks.matryoshka-paradigms.workers.dev/catalogue` — every handle, its size and price. Free.
-2. `GET /node/<path>` — a node; paid nodes answer 402 with the price and payment terms (x402, USDC on Base), nothing is charged for a 402 or a failed call.
+2. `GET /node/<path>` — a node; paid nodes answer 402 with a JSON body carrying the price, the payment terms (x402, USDC on Base), how to pay and the fit block; nothing is charged for a 402 or a failed call.
 3. `POST /apply/<decision>` with the inputs — the decision computed on your numbers.
 
 Cite as: McHenry, J. (2026). *Business Frameworks*, version 1.0, `business-frameworks/<handle>@1.0`. Free layer CC BY-ND 4.0; paid node text all rights reserved, licensed per purchase.
