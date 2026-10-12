@@ -4,6 +4,18 @@
 
 Ask narrow, pay per node; ask broad, get a quoted bundle whose price is the sum of the nodes it takes, stated before you pay.
 
+## By family — five pages in the owner's words
+
+Each page opens with the question an owner asks, names the decisions that answer it with what each takes and returns, works one example from the free layer alone, and lists the published sources.
+
+| Family | The question it opens with | Decisions |
+|---|---|---|
+| [Cash resilience](decisions/cash-resilience.md) | when does the cash run out, and what do we defer first? | `cash-flow/decide/runway`, `cash-flow/decide/cash-cycle`, `market/decide/shock` |
+| [Owner economics and transferability](decisions/owner-economics-and-transferability.md) | after a replacement wage for my own hours, is there a business here — and build it to sell or run it for cash? | `cash-flow/decide/owner-pay`, `value/decide/build-or-run-for-cash` |
+| [Dependency and capital policy](decisions/dependency-and-capital-policy.md) | what is the concentration rule, and what hurdle should the new cell clear? | `risk/decide/concentration`, `risk/decide/hurdle`, `market/decide/binding-node` |
+| [Capital allocation and expansion](decisions/capital-allocation-and-expansion.md) | which uses of cash clear the screens, how fast can we grow on our own cash, and do we distribute this year? | `value/decide/reinvest-or-distribute`, `growth/decide/pace`, `growth/decide/adjacency` |
+| [Pricing bounds](decisions/pricing-bounds.md) | what is the floor, the ceiling and the room between them for each segment we quote? | `growth/decide/price`, `market/decide/verdict`, `market/decide/pricing-power`, `market/decide/rent` |
+
 ## The ten decisions of value, cash flow, risk and growth
 
 *Units.* Fields ending _pct take a number of percent (13 means 13%, not 0.13). Fields ending _per_sales_dollar are fractions of a sales dollar (0.65 means 65 cents), and probabilities run from 0 to 1. Money is a plain number in one currency for the whole call; revenue_usd alone is in US dollars, because the scale bands are set in US dollars.
