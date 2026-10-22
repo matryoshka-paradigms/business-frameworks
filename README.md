@@ -2,12 +2,12 @@
 
 Operating judgement for running a business from launch to about $50M in revenue, by Joseph McHenry, packaged as an Agent Skill. The skill tells an agent how to read the free top layer, how to pick the one deeper node that answers a narrow question or the quoted bundle that answers a broad one, and how to pay over x402 with the user's approval.
 
-> Ask narrow, pay per node; ask broad, get a quoted bundle whose price is the sum of the nodes it takes, stated before you pay.
+> Ask narrow, pay per node; ask broad, get a quoted bundle at USD 0.05, stated before you pay.
 
 - Canonical page and free layer: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
 - Endpoint and catalogue: https://business-frameworks.matryoshka-paradigms.workers.dev/catalogue
-- Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.2, `business-frameworks/<handle>@1.2`.
-- Why use it, measured: [`OVERVIEW.md`](OVERVIEW.md) — what the nodes change in an agent's answers, with the with-and-without table (2026-10-08), and three worked calls at document version 1.2: a narrow question, a broad one, and a decision run on the user's figures.
+- Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.3, `business-frameworks/<handle>@1.3`.
+- Why use it, measured: [`OVERVIEW.md`](OVERVIEW.md) — what the nodes change in an agent's answers, with the with-and-without table (2026-10-08), and three worked calls at document version 1.3: a narrow question, a broad one, and a decision run on the user's figures.
 - Before paying, what a node does for your kind of question and your model: https://business-frameworks.matryoshka-paradigms.workers.dev/fit — the measured rule-right rates, the cost per right answer and the recommended path, with a verdict per decision (`use`, `apply`, `unproven`, `not_measured`); the same block is in every 402.
 
 ## What is in this repository
@@ -34,13 +34,13 @@ What the endpoint records: the endpoint keeps a request log: time, method, path,
 
 ## What it costs and who pays
 
-Eleven nodes are free. Forty-eight deeper nodes cost $0.02 to $0.05 each, each of the fifteen decisions can be applied to your own numbers for $0.05, and a bundle — the nodes a broad task takes, quoted free first — costs the sum of its nodes ($0.05 to about $0.20), paid in USDC on Base over x402. Payment needs an x402 client and a wallet you supply and control. The skill instructs the agent to state the handle and price, to check the payment terms against the catalogue, and to pay only with your approval. Without a wallet the free layer and the free input schemas still work.
+Eleven nodes are free. Forty-eight deeper nodes cost $0.02 to $0.05 each, each of the fifteen decisions can be applied to your own numbers for $0.05, and a bundle — the nodes a broad task takes, quoted free first — costs a flat $0.05 with or without its scale band, paid in USDC on Base over x402. Nothing on the endpoint costs more than $0.05 a call. Payment needs an x402 client and a wallet you supply and control. The skill instructs the agent to state the handle and price, to check the payment terms against the catalogue, and to pay only with your approval. Without a wallet the free layer and the free input schemas still work.
 
 ## What to check before you install
 
 1. Read `SKILL.md`. It is the whole skill.
 2. Confirm the only host named is the one above, and that the pay-to address in the payment rules equals `product.pay_to` in the live catalogue.
-3. Pin a tagged release (`v0.2.0`) if you want the text you reviewed to be the text that runs.
+3. Pin a tagged release (`v0.3.0`) if you want the text you reviewed to be the text that runs.
 4. The skill ships no code. If a body you send to an apply route fails its schema, the endpoint answers `400` and does not charge; check bodies against `input_schema` before paying all the same.
 
 ## Limits
@@ -51,6 +51,7 @@ Scope is businesses up to about $50M revenue. This is not legal, tax or investme
 
 ## Changes
 
+- **0.3.0 (2026-10-22)** — document version 1.3 on endpoint build 2026.10.22. Three decision rules re-worded where small models misread them (the runway floor as one number with the reserve part of it; reinvestment funded from the whole balance, the reserve-first reading named as excluded; the gross and the net cash cycle both named, the tie-up on the gross) — every handle is `@1.3`, the 1.2 and 1.0 texts stay readable at their own handles. A third variant of every node, `?variant=agent`: the accepted text as fields (scope, inputs, rule, action, check, reasoning, units, a worked example, the applied route, the recheck, and two strings to paste — `recheck_note` and `closing_citation`), the same price; `bf_read_node` takes it too. Every bundle at a flat USD 0.05, band included, and the access sentence re-stated on every surface; the per-payment cap in the skill falls to USD 0.05. The skill's step 8 says how to answer with a node in hand (the decision in one sentence, the first step, the reason, the next check, the offer to write the recheck into the user's notes, the citation last) and sends figures to the applied route rather than computing by hand. The six MCP tools declare output schemas; the payment-required tool result carries the 402's facts; `openapi.json` carries real response examples for the applied routes.
 - **0.2.0 (2026-10-10)** — document version 1.2 on endpoint build 2026.10.10: 59 nodes (32 re-cut in one shape — lede, conditions, reasoning — and served full or terse at the same price; 27 new: the `market` branch with its why node, six method nodes, four scale bands, six chain patterns and five applied decisions, and the free `decision` branch on parameters, extension and effort). Twenty quoted bundles behind a free deterministic resolver (`POST /resolve`). The skill routes narrow questions to one node and broad ones to a quote, adds the market and bundle rows to its table, raises the per-payment cap to USD 0.25 for bundles, and states the two variants. Every handle is `@1.2`; the 1.0 text stays readable at `@1.0`. The MCP server has six tools. 0.1.4's skill fix and `evals/` are included.
 - **0.1.4 (2026-10-10)** — the skill body no longer writes a dollar sign directly before a digit: Claude Code reads `$0`, `$1` and `$5` in a skill as argument placeholders, so on a load with arguments the prices, the payment cap and the scale bands reached the model rewritten (found by the eval suite). Amounts now read `USD 0.05`. `evals/` added: a suite for `claude plugin eval`, free layer only. The skill and this page now ask clients to send a `User-Agent` header: the host's edge refuses some default client signatures with 403, error 1010, before a request reaches the endpoint.
 - **0.1.3 (2026-10-09)** — the skill asks `/fit` before paying and follows its verdict; the shapes name the JSON 402 body, `body_check`, `HEAD` → 402 and the versioned route; the endpoint's data statement (above) is stated in the skill. Endpoint 1.2 deployed the same day: a request log as stated, JSON 402 bodies with the payment terms, the fit block, `/llms.txt`, `/.well-known/x402`, `/openapi.json`, an MCP server at `/mcp`, and one URL spelling per paid route. The nodes are unchanged at 1.0.

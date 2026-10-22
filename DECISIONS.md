@@ -1,8 +1,8 @@
 # The decisions — what each takes, what it returns
 
-*Document version 1.2 (endpoint build 2026.10.10). Fifteen decision nodes, each in the shape inputs / rule / action / check, each applied to the caller's own figures at `POST /apply/<path>` for the node's price (USD 0.05). The schema and an example are free at `GET /apply/<path>`; an unpaid POST answers 402 with `body_check`, so a body is found wrong before anything is paid. The rule is applied exactly as the node states it — no model sits between the inputs and the answer. Prices and handles are in the live catalogue; this page is for orientation.*
+*Document version 1.3 (endpoint build 2026.10.22). Fifteen decision nodes, each in the shape inputs / rule / action / check, each applied to the caller's own figures at `POST /apply/<path>` for the node's price (USD 0.05). The schema and an example are free at `GET /apply/<path>`; an unpaid POST answers 402 with `body_check`, so a body is found wrong before anything is paid. The rule is applied exactly as the node states it — no model sits between the inputs and the answer. Prices and handles are in the live catalogue; this page is for orientation.*
 
-Ask narrow, pay per node; ask broad, get a quoted bundle whose price is the sum of the nodes it takes, stated before you pay.
+Ask narrow, pay per node; ask broad, get a quoted bundle at USD 0.05, stated before you pay. When the question gives figures for a decision, the applied route computes them; the answer reports its result and does not recompute it.
 
 ## The ten decisions of value, cash flow, risk and growth
 
@@ -11,12 +11,12 @@ Ask narrow, pay per node; ask broad, get a quoted bundle whose price is the sum 
 | Decision | Node | Takes (required; optional) | Returns |
 |---|---|---|---|
 | `risk/decide/hurdle` | Set the hurdle rate (170 tokens, terse 170) | `long_bond_yield_pct`, `asset_betas`; `market_premium_pct`, `personal_premium_pct`, `revenue_usd`, `plan_probability` | r for this business — its cost of capital, the discount rate — with the sub-$5M probability rule and the concentrated owner's stated premium applied. |
-| `cash-flow/decide/cash-cycle` | Manage the cash cycle (160 tokens, terse 160) | `days_receivable`, `days_inventory`, `days_supplier_credit`, `cost_of_sales_per_sales_dollar`, `operating_expense_per_sales_dollar` | the cycle, the cents tied up per sales dollar, and the lever to pull first. |
-| `cash-flow/decide/runway` | Keep the runway (317 tokens, terse 195) | `opening_cash`, `periods`; `operating_cash_month`, `bad_month_collections`, `revenue_usd` | the first breach of the floor — the next period's must-pay outflows plus the reserve — and the action order with amounts. |
+| `cash-flow/decide/cash-cycle` | Manage the cash cycle (209 tokens, terse 209) | `days_receivable`, `days_inventory`, `days_supplier_credit`, `cost_of_sales_per_sales_dollar`, `operating_expense_per_sales_dollar` | the cycle, the cents tied up per sales dollar, and the lever to pull first. |
+| `cash-flow/decide/runway` | Keep the runway (343 tokens, terse 221) | `opening_cash`, `periods`; `operating_cash_month`, `bad_month_collections`, `revenue_usd` | the first breach of the floor — the next period's must-pay outflows plus the reserve — and the action order with amounts. |
 | `growth/decide/pace` | Set the pace of growth (146 tokens, terse 146) | `planned_growth_pct`, `r_pct`; `self_financeable_ceiling_pct`, `cash_margin_per_sales_dollar`, `days_receivable`, `days_inventory`, `days_supplier_credit`, `cost_of_sales_per_sales_dollar`, `operating_expense_per_sales_dollar`, `outside_capital` | whether the plan funds itself and whether outside money is worth taking. |
 | `growth/decide/price` | Set the price (196 tokens, terse 196) | `reference_price`, `incremental_cost`, `segments` | the ceiling and floor per segment and the room between them. |
 | `risk/decide/concentration` | Limit concentration (137 tokens, terse 137) | `largest_customer_share_pct`, `largest_supplier_share_pct`; `owner_only_functions`, `threshold_pct` | which dependencies are priced risks and what to do first. |
-| `value/decide/reinvest-or-distribute` | Reinvest or distribute (258 tokens, terse 200) | `r_pct`, `cash_available`, `runway_target`, `candidates`; `screen_pct`, `revenue_usd` | them ranked, the ones to fund, where to stop, and what to distribute. |
+| `value/decide/reinvest-or-distribute` | Reinvest or distribute (283 tokens, terse 225) | `r_pct`, `cash_available`, `runway_target`, `candidates`; `screen_pct`, `revenue_usd` | them ranked, the ones to fund, where to stop, and what to distribute. |
 | `cash-flow/decide/owner-pay` | Pay the owner first (98 tokens, terse 98) | `owner_hours_per_year`, `market_wage_per_hour`, `reported_cash_flow`; `distributions_taken` | the cash flow after a market wage — and whether the business is a job that loses money. |
 | `value/decide/build-or-run-for-cash` | Build for transfer or run for cash (165 tokens, terse 165) | `durable_position`, `founder_free_revenue_share_pct`, `repeating_revenue_share_pct`; `previous_quarter` | build-for-transfer or run-for-cash, the matching actions, and the quarterly check. |
 | `growth/decide/adjacency` | Approve or refuse an adjacency (257 tokens, terse 257) | `core_not_at_risk`, `only_move_under_way`, `reuses_core`; `move`, `creates_value_for_segment`, `can_be_top_three`, `stop_condition_written`, `failure_patterns` | approve or refuse, with the failing screens named. |
@@ -65,6 +65,14 @@ Ask narrow, pay per node; ask broad, get a quoted bundle whose price is the sum 
   "cite_as": "McHenry, J. (2026). Business Frameworks, version 1.2, business-frameworks/<path>@1.2."
 }
 ```
+
+## Three rule sentences re-worded at document version 1.3
+
+The rules did not change; their Rule sentences were re-worded where small models misread them in the 2026-10-21 measurement, and the 1.2 text stays readable at `@1.2`.
+
+- `cash-flow/decide/runway`: the floor in every period is one number — the next period's must-pay outflows plus the reserve — and the test is closing cash against that floor; the reserve is part of the floor, not a target, so closing below the floor is a breach while cash is still positive.
+- `value/decide/reinvest-or-distribute`: candidates are funded from the whole cash balance; the runway target is held from what remains after them and the rest is distributed; a reserve set aside first and funded from the remainder is the reading the rule excludes.
+- `cash-flow/decide/cash-cycle`: two cycles are read, the gross (receivable days plus inventory days) and the net (the gross less supplier-credit days); the cash each dollar of growth costs uses the gross cycle, with supplier credit counted inside the tie-up rather than subtracted from the days.
 
 ## Three rule changes at document version 1.2
 
