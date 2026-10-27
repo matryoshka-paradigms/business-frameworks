@@ -81,3 +81,5 @@ The rules did not change; their Rule sentences were re-worded where small models
 - `growth/decide/adjacency`: the second screen is that the offer creates value for a defined segment (`creates_value_for_segment`; `can_be_top_three` accepted through this release); a move that fails a screen is refused as it stands and may be re-submitted once the screen is fixed or dropped.
 
 The twenty-first scenario set that confirms every rule on invented businesses is the evidence pack (`measurement/` for the with-and-without measurement of 2026-10-08; the pack itself is published with the card).
+
+Author page: https://matryoshkaparadigms.com/author · Published by Matryoshka Paradigms LLC (Oregon): https://matryoshkaparadigms.com/ · Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.3, `business-frameworks/<handle>@1.3`.
