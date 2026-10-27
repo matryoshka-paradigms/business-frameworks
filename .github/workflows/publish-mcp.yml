@@ -1,0 +1,35 @@
+# Publish server.json to the MCP Registry (io.github.matryoshka-paradigms/business-frameworks) by GitHub OIDC — R28, 2026-10-27.
+# Runs when server.json changes on main (or by hand). Skips when the version in server.json is already published, so a re-run is safe.
+# No token is stored anywhere: the registry trusts this repository's OIDC identity for the organization's namespace.
+name: Publish to MCP Registry
+on:
+  push:
+    branches: [main]
+    paths: [server.json]
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mcp-publisher
+        run: |
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/').tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher --version
+      - name: Login (GitHub OIDC)
+        run: ./mcp-publisher login github-oidc
+      - name: Skip if this version is already published
+        id: check
+        run: |
+          NAME=$(jq -r .name server.json); VERSION=$(jq -r .version server.json)
+          if curl -fsS "https://registry.modelcontextprotocol.io/v0/servers?search=${NAME}" | jq -e --arg v "$VERSION" '.servers[] | select((.server // .).version == $v)' > /dev/null; then
+            echo "already published: $NAME $VERSION"; echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "publishing: $NAME $VERSION"; echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish
+        if: steps.check.outputs.skip == 'false'
+        run: ./mcp-publisher publish
