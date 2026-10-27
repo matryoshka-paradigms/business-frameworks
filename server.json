@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.matryoshka-paradigms/business-frameworks",
+  "title": "Business Frameworks",
+  "description": "Operating judgement for businesses under $50M revenue. Free top layer; nodes and bundles over x402.",
+  "version": "2026.10.26",
+  "websiteUrl": "https://matryoshkaparadigms.com/",
+  "repository": {
+    "url": "https://github.com/matryoshka-paradigms/business-frameworks",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://business-frameworks.matryoshka-paradigms.workers.dev/mcp"
+    }
+  ]
+}
