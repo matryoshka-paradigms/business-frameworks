@@ -5,7 +5,9 @@ license: MIT for the files in this repository (this skill, its references, the m
 compatibility: Needs outbound HTTPS to business-frameworks.matryoshka-paradigms.workers.dev. The free layer needs nothing else. Paid calls need an x402 client and a wallet holding USDC on Base, both supplied and controlled by the user.
 metadata:
   author: Joseph McHenry
-  skill-version: "0.3.0"
+  author-url: https://matryoshkaparadigms.com/author
+  publisher: Matryoshka Paradigms LLC (Oregon), https://matryoshkaparadigms.com/
+  skill-version: "0.3.1"
   product-version: "1.3"
   endpoint-build: "2026.10.22"
   homepage: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
@@ -13,7 +15,7 @@ metadata:
 
 # Business Frameworks
 
-A layered document of operating judgement by Joseph McHenry. Every node has a handle `business-frameworks/<path>@<version>`, a token count and a price. One objective sits at the top, V = CF/(r − g): value equals cash flow divided by the cost of capital less long-term growth. Five branches descend from it — value, cash-flow, risk, growth and market (the chain of nodes a business sells into and buys from) — each from the why, to the scale band, to the decision; a sixth, decision, says how every rule's parameters are set and adjusted. The current document version is 1.3; the 1.2 and 1.0 texts stay readable at their own handles.
+A layered document of operating judgement by Joseph McHenry (author page: https://matryoshkaparadigms.com/author), published by Matryoshka Paradigms LLC, Oregon. Every node has a handle `business-frameworks/<path>@<version>`, a token count and a price. One objective sits at the top, V = CF/(r − g): value equals cash flow divided by the cost of capital less long-term growth. Five branches descend from it — value, cash-flow, risk, growth and market (the chain of nodes a business sells into and buys from) — each from the why, to the scale band, to the decision; a sixth, decision, says how every rule's parameters are set and adjusted. The current document version is 1.3; the 1.2 and 1.0 texts stay readable at their own handles.
 
 Ask narrow, pay per node; ask broad, get a quoted bundle at USD 0.05, stated before you pay.
 
