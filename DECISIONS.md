@@ -1,6 +1,6 @@
 # The decisions — what each takes, what it returns
 
-*Document version 1.3 (endpoint build 2026.10.22). Fifteen decision nodes, each in the shape inputs / rule / action / check, each applied to the caller's own figures at `POST /apply/<path>` for the node's price (USD 0.05). The schema and an example are free at `GET /apply/<path>`; an unpaid POST answers 402 with `body_check`, so a body is found wrong before anything is paid. The rule is applied exactly as the node states it — no model sits between the inputs and the answer. Prices and handles are in the live catalogue; this page is for orientation.*
+*Document version 1.4 (endpoint build 2026.10.29). Seventeen decision nodes, each in the shape inputs / rule / action / check; fifteen of them are applied to the caller's own figures at `POST /apply/<path>` for the node's price (USD 0.05), and the two ethics decisions are served as nodes only. The schema and an example are free at `GET /apply/<path>`; an unpaid POST answers 402 with `body_check`, so a body is found wrong before anything is paid. The rule is applied exactly as the node states it — no model sits between the inputs and the answer. Prices and handles are in the live catalogue; this page is for orientation.*
 
 Ask narrow, pay per node; ask broad, get a quoted bundle at USD 0.05, stated before you pay. When the question gives figures for a decision, the applied route computes them; the answer reports its result and does not recompute it.
 
@@ -66,6 +66,15 @@ Ask narrow, pay per node; ask broad, get a quoted bundle at USD 0.05, stated bef
 }
 ```
 
+## Two ethics decisions at document version 1.4 — nodes only
+
+Served as nodes at USD 0.05 each, in the same shape; no apply route yet (`/apply` and `/fit` answer `unknown_decision` for them). Read `ethics/feasible` (free) first: it says which options are struck before anything is ranked.
+
+| Decision | Handle | Tokens | Price |
+|---|---|---|---|
+| A safety objection against cost or schedule | `ethics/decide/safety-concern` | 178 | USD 0.05 |
+| Telling the people who rely on a fact | `ethics/decide/disclose` | 172 | USD 0.05 |
+
 ## Three rule sentences re-worded at document version 1.3
 
 The rules did not change; their Rule sentences were re-worded where small models misread them in the 2026-10-21 measurement, and the 1.2 text stays readable at `@1.2`.
@@ -82,4 +91,4 @@ The rules did not change; their Rule sentences were re-worded where small models
 
 The twenty-first scenario set that confirms every rule on invented businesses is the evidence pack (`measurement/` for the with-and-without measurement of 2026-10-08; the pack itself is published with the card).
 
-Author page: https://matryoshkaparadigms.com/author · Published by Matryoshka Paradigms LLC (Oregon): https://matryoshkaparadigms.com/ · Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.3, `business-frameworks/<handle>@1.3`.
+Author page: https://matryoshkaparadigms.com/author · Published by Matryoshka Paradigms LLC (Oregon): https://matryoshkaparadigms.com/ · Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.4, `business-frameworks/<handle>@1.4`.
