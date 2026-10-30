@@ -1,68 +1,76 @@
-# Handles — Business Frameworks, document version 1.3
+# Handles — Business Frameworks, document version 1.4
 
-Copied from `GET /catalogue` of endpoint build 2026.10.22 on 2026-10-22. The live catalogue is the authority on handles, token counts, prices and bundles; if this file and the catalogue differ, the catalogue is right. All handles are prefixed `business-frameworks/` and carry `@1.3`; every node also answers at `@1.2` with its 1.2 text, and the 32 marked 1.0 at `@1.0` as well. Tokens are the full variant, with the terse variant in parentheses; the agent variant (`?variant=agent`) carries the full text as fields at the same price.
+Copied from `GET /catalogue` of endpoint build 2026.10.29 on 2026-10-29. The live catalogue is the authority on handles, token counts, prices and bundles; if this file and the catalogue differ, the catalogue is right. All handles are prefixed `business-frameworks/` and carry `@1.4`; the 59 nodes of 1.3 also answer at `@1.3` and `@1.2` with those texts, and the 32 marked 1.0 at `@1.0` as well. The two ethics decisions are served as nodes only; they have no apply route yet. Tokens are the full variant, with the terse variant in parentheses; the agent variant (`?variant=agent`) carries the full text as fields at the same price.
 
 | Path | Title | Layer | Tokens (terse) | Price | Apply route | Versions |
 |---|---|---|---|---|---|---|
-| `equation` | The equation V = CF/(r − g) | 0 | 275 (44) | free |  | 1.3, 1.2, 1.0 |
-| `value` | Value (V) | 1 | 241 (72) | free |  | 1.3, 1.2, 1.0 |
-| `cash-flow` | Cash flow (CF) | 1 | 251 (51) | free |  | 1.3, 1.2, 1.0 |
-| `risk` | Risk (r) | 1 | 275 (91) | free |  | 1.3, 1.2, 1.0 |
-| `growth` | Growth (g) | 1 | 229 (94) | free |  | 1.3, 1.2, 1.0 |
-| `value/15s` | Long-term shareholder value in fifteen seconds | 1 | 83 (83) | free |  | 1.3, 1.2, 1.0 |
-| `value/why` | Why value is the objective, and what moves it | 2 | 290 (89) | USD 0.02 |  | 1.3, 1.2, 1.0 |
-| `value/band/sub-1m` | Value below $1M: the owner is the business | 2 | 292 (106) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `value/band/5-25m` | Value $5–25M: the business becomes an asset | 2 | 197 (114) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `value/band/25-50m` | Value $25–50M: value is position | 2 | 243 (44) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `cash-flow/why` | Why profit is not cash, and where the cash goes | 2 | 318 (65) | USD 0.02 |  | 1.3, 1.2, 1.0 |
-| `cash-flow/band/sub-1m` | Cash flow below $1M: pay the owner first | 2 | 202 (63) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `cash-flow/band/1-5m` | Cash flow $1–5M: the cash cycle rules | 2 | 272 (143) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `cash-flow/band/5-25m` | Cash flow $5–25M: capital allocation | 2 | 194 (71) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `cash-flow/pro-forma` | How the forward view is built | 2 | 278 (201) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `risk/why` | Why r is a price, and how it is set | 2 | 494 (106) | USD 0.02 |  | 1.3, 1.2, 1.0 |
-| `risk/band/sub-5m` | Risk below $5M: the chance of survival | 2 | 290 (101) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `risk/band/5-50m` | Risk from $5M up: market-referenced r | 2 | 193 (78) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `growth/why` | Why growth is conditional, and where its ceiling is | 2 | 298 (89) | USD 0.02 |  | 1.3, 1.2, 1.0 |
-| `growth/forecast` | From a revenue forecast to a g you can defend | 2 | 232 (168) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `growth/self-financeable` | The growth the business can pay for itself | 2 | 358 (131) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `growth/band/25-50m` | Growth $25–50M: a scope decision | 2 | 285 (81) | USD 0.03 |  | 1.3, 1.2, 1.0 |
-| `value/decide/reinvest-or-distribute` | Reinvest or distribute | 3 | 283 (225) | USD 0.05 | `POST /apply/value/decide/reinvest-or-distribute` USD 0.05 | 1.3, 1.2, 1.0 |
-| `value/decide/build-or-run-for-cash` | Build for transfer or run for cash | 3 | 165 (165) | USD 0.05 | `POST /apply/value/decide/build-or-run-for-cash` USD 0.05 | 1.3, 1.2, 1.0 |
-| `cash-flow/decide/cash-cycle` | Manage the cash cycle | 3 | 209 (209) | USD 0.05 | `POST /apply/cash-flow/decide/cash-cycle` USD 0.05 | 1.3, 1.2, 1.0 |
-| `cash-flow/decide/runway` | Keep the runway | 3 | 343 (221) | USD 0.05 | `POST /apply/cash-flow/decide/runway` USD 0.05 | 1.3, 1.2, 1.0 |
-| `cash-flow/decide/owner-pay` | Pay the owner first | 3 | 98 (98) | USD 0.05 | `POST /apply/cash-flow/decide/owner-pay` USD 0.05 | 1.3, 1.2, 1.0 |
-| `risk/decide/hurdle` | Set the hurdle rate | 3 | 170 (170) | USD 0.05 | `POST /apply/risk/decide/hurdle` USD 0.05 | 1.3, 1.2, 1.0 |
-| `risk/decide/concentration` | Limit concentration | 3 | 137 (137) | USD 0.05 | `POST /apply/risk/decide/concentration` USD 0.05 | 1.3, 1.2, 1.0 |
-| `growth/decide/pace` | Set the pace of growth | 3 | 146 (146) | USD 0.05 | `POST /apply/growth/decide/pace` USD 0.05 | 1.3, 1.2, 1.0 |
-| `growth/decide/price` | Set the price | 3 | 196 (196) | USD 0.05 | `POST /apply/growth/decide/price` USD 0.05 | 1.3, 1.2, 1.0 |
-| `growth/decide/adjacency` | Approve or refuse an adjacency | 3 | 257 (257) | USD 0.05 | `POST /apply/growth/decide/adjacency` USD 0.05 | 1.3, 1.2, 1.0 |
-| `decision` | Decision rules: wrong as rarely as possible for the effort | 1 | 210 (91) | free |  | 1.3, 1.2 |
-| `decision/parameters` | Parameters: the defaults, and the ladder for adjusting them | 2 | 265 (103) | free |  | 1.3, 1.2 |
-| `decision/extension` | Extension: outside the bands the rules were written for | 2 | 233 (87) | free |  | 1.3, 1.2 |
-| `decision/effort` | Effort: match the analysis to the stakes | 2 | 255 (101) | free |  | 1.3, 1.2 |
-| `market` | Market (the chain): rent accrues at the node that binds | 1 | 195 (83) | free |  | 1.3, 1.2 |
-| `market/why` | Why the constraint is read before the price | 2 | 372 (147) | USD 0.02 |  | 1.3, 1.2 |
-| `market/map` | Map the chain as markets, not companies | 2 | 426 (122) | USD 0.03 |  | 1.3, 1.2 |
-| `market/edges` | Draw the edges: weights, lags, pull and constraint | 2 | 357 (132) | USD 0.03 |  | 1.3, 1.2 |
-| `market/structure` | Score the structure and read the sellers' propensity | 2 | 344 (135) | USD 0.03 |  | 1.3, 1.2 |
-| `market/balance` | Balance supply against demand and find the crossing | 2 | 348 (128) | USD 0.03 |  | 1.3, 1.2 |
-| `market/buyers` | Sort the buyers into four tiers | 2 | 320 (140) | USD 0.03 |  | 1.3, 1.2 |
-| `market/shocks` | Test the node against four shocks | 2 | 333 (124) | USD 0.03 |  | 1.3, 1.2 |
-| `market/band/sub-1m` | Market below $1M: a buyer at the end of a chain | 2 | 303 (125) | USD 0.03 |  | 1.3, 1.2 |
-| `market/band/1-5m` | Market $1–5M: the customer node's verdict is the ceiling | 2 | 298 (127) | USD 0.03 |  | 1.3, 1.2 |
-| `market/band/5-25m` | Market $5–25M: the node's four quantities are yours | 2 | 310 (133) | USD 0.03 |  | 1.3, 1.2 |
-| `market/band/25-50m` | Market $25–50M: possibly the binding node of a regional chain | 2 | 310 (104) | USD 0.03 |  | 1.3, 1.2 |
-| `market/pattern/layered-input` | Pattern: an input at many layers is not a branch | 2 | 272 (115) | USD 0.03 |  | 1.3, 1.2 |
-| `market/pattern/shared-name` | Pattern: two bases under one name are two chains | 2 | 239 (84) | USD 0.03 |  | 1.3, 1.2 |
-| `market/pattern/relieved-capacity` | Pattern: relieved capacity is the small firm's window | 2 | 273 (110) | USD 0.03 |  | 1.3, 1.2 |
-| `market/pattern/shared-upstream` | Pattern: a shared upstream node enters once | 2 | 253 (104) | USD 0.03 |  | 1.3, 1.2 |
-| `market/pattern/split-test` | Pattern: the buyer decides a split | 2 | 279 (106) | USD 0.03 |  | 1.3, 1.2 |
-| `market/pattern/binding-shift` | Pattern: a change moves the binding node | 2 | 303 (98) | USD 0.03 |  | 1.3, 1.2 |
-| `market/decide/verdict` | Read a node's verdict | 3 | 234 (167) | USD 0.05 | `POST /apply/market/decide/verdict` USD 0.05 | 1.3, 1.2 |
-| `market/decide/pricing-power` | Score pricing power | 3 | 291 (228) | USD 0.05 | `POST /apply/market/decide/pricing-power` USD 0.05 | 1.3, 1.2 |
-| `market/decide/binding-node` | Find the binding node | 3 | 256 (199) | USD 0.05 | `POST /apply/market/decide/binding-node` USD 0.05 | 1.3, 1.2 |
-| `market/decide/rent` | Price the rent over the horizon | 3 | 186 (122) | USD 0.05 | `POST /apply/market/decide/rent` USD 0.05 | 1.3, 1.2 |
-| `market/decide/shock` | Transfer a shock to your seat | 3 | 298 (228) | USD 0.05 | `POST /apply/market/decide/shock` USD 0.05 | 1.3, 1.2 |
+| `equation` | The equation V = CF/(r − g) | 0 | 298 (44) | free |  | 1.4, 1.3, 1.2, 1.0 |
+| `value` | Value (V) | 1 | 241 (72) | free |  | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow` | Cash flow (CF) | 1 | 251 (51) | free |  | 1.4, 1.3, 1.2, 1.0 |
+| `risk` | Risk (r) | 1 | 275 (91) | free |  | 1.4, 1.3, 1.2, 1.0 |
+| `growth` | Growth (g) | 1 | 229 (94) | free |  | 1.4, 1.3, 1.2, 1.0 |
+| `value/15s` | Long-term shareholder value in fifteen seconds | 1 | 83 (83) | free |  | 1.4, 1.3, 1.2, 1.0 |
+| `value/why` | Why value is the objective, and what moves it | 2 | 290 (89) | USD 0.02 |  | 1.4, 1.3, 1.2, 1.0 |
+| `value/band/sub-1m` | Value below $1M: the owner is the business | 2 | 292 (106) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `value/band/5-25m` | Value $5–25M: the business becomes an asset | 2 | 197 (114) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `value/band/25-50m` | Value $25–50M: value is position | 2 | 243 (44) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/why` | Why profit is not cash, and where the cash goes | 2 | 318 (65) | USD 0.02 |  | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/band/sub-1m` | Cash flow below $1M: pay the owner first | 2 | 202 (63) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/band/1-5m` | Cash flow $1–5M: the cash cycle rules | 2 | 272 (143) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/band/5-25m` | Cash flow $5–25M: capital allocation | 2 | 194 (71) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/pro-forma` | How the forward view is built | 2 | 278 (201) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `risk/why` | Why r is a price, and how it is set | 2 | 494 (106) | USD 0.02 |  | 1.4, 1.3, 1.2, 1.0 |
+| `risk/band/sub-5m` | Risk below $5M: the chance of survival | 2 | 290 (101) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `risk/band/5-50m` | Risk from $5M up: market-referenced r | 2 | 193 (78) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `growth/why` | Why growth is conditional, and where its ceiling is | 2 | 298 (89) | USD 0.02 |  | 1.4, 1.3, 1.2, 1.0 |
+| `growth/forecast` | From a revenue forecast to a g you can defend | 2 | 232 (168) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `growth/self-financeable` | The growth the business can pay for itself | 2 | 358 (131) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `growth/band/25-50m` | Growth $25–50M: a scope decision | 2 | 285 (81) | USD 0.03 |  | 1.4, 1.3, 1.2, 1.0 |
+| `value/decide/reinvest-or-distribute` | Reinvest or distribute | 3 | 283 (225) | USD 0.05 | `POST /apply/value/decide/reinvest-or-distribute` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `value/decide/build-or-run-for-cash` | Build for transfer or run for cash | 3 | 165 (165) | USD 0.05 | `POST /apply/value/decide/build-or-run-for-cash` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/decide/cash-cycle` | Manage the cash cycle | 3 | 209 (209) | USD 0.05 | `POST /apply/cash-flow/decide/cash-cycle` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/decide/runway` | Keep the runway | 3 | 343 (221) | USD 0.05 | `POST /apply/cash-flow/decide/runway` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `cash-flow/decide/owner-pay` | Pay the owner first | 3 | 98 (98) | USD 0.05 | `POST /apply/cash-flow/decide/owner-pay` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `risk/decide/hurdle` | Set the hurdle rate | 3 | 170 (170) | USD 0.05 | `POST /apply/risk/decide/hurdle` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `risk/decide/concentration` | Limit concentration | 3 | 137 (137) | USD 0.05 | `POST /apply/risk/decide/concentration` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `growth/decide/pace` | Set the pace of growth | 3 | 146 (146) | USD 0.05 | `POST /apply/growth/decide/pace` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `growth/decide/price` | Set the price | 3 | 196 (196) | USD 0.05 | `POST /apply/growth/decide/price` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `growth/decide/adjacency` | Approve or refuse an adjacency | 3 | 257 (257) | USD 0.05 | `POST /apply/growth/decide/adjacency` USD 0.05 | 1.4, 1.3, 1.2, 1.0 |
+| `decision` | Decision rules: wrong as rarely as possible for the effort | 1 | 210 (91) | free |  | 1.4, 1.3, 1.2 |
+| `decision/parameters` | Parameters: the defaults, and the ladder for adjusting them | 2 | 265 (103) | free |  | 1.4, 1.3, 1.2 |
+| `decision/extension` | Extension: outside the bands the rules were written for | 2 | 233 (87) | free |  | 1.4, 1.3, 1.2 |
+| `decision/effort` | Effort: match the analysis to the stakes | 2 | 255 (101) | free |  | 1.4, 1.3, 1.2 |
+| `market` | Market (the chain): rent accrues at the node that binds | 1 | 195 (83) | free |  | 1.4, 1.3, 1.2 |
+| `market/why` | Why the constraint is read before the price | 2 | 372 (147) | USD 0.02 |  | 1.4, 1.3, 1.2 |
+| `market/map` | Map the chain as markets, not companies | 2 | 426 (122) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/edges` | Draw the edges: weights, lags, pull and constraint | 2 | 357 (132) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/structure` | Score the structure and read the sellers' propensity | 2 | 344 (135) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/balance` | Balance supply against demand and find the crossing | 2 | 348 (128) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/buyers` | Sort the buyers into four tiers | 2 | 320 (140) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/shocks` | Test the node against four shocks | 2 | 333 (124) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/band/sub-1m` | Market below $1M: a buyer at the end of a chain | 2 | 303 (125) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/band/1-5m` | Market $1–5M: the customer node's verdict is the ceiling | 2 | 298 (127) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/band/5-25m` | Market $5–25M: the node's four quantities are yours | 2 | 310 (133) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/band/25-50m` | Market $25–50M: possibly the binding node of a regional chain | 2 | 310 (104) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/pattern/layered-input` | Pattern: an input at many layers is not a branch | 2 | 272 (115) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/pattern/shared-name` | Pattern: two bases under one name are two chains | 2 | 239 (84) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/pattern/relieved-capacity` | Pattern: relieved capacity is the small firm's window | 2 | 273 (110) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/pattern/shared-upstream` | Pattern: a shared upstream node enters once | 2 | 253 (104) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/pattern/split-test` | Pattern: the buyer decides a split | 2 | 279 (106) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/pattern/binding-shift` | Pattern: a change moves the binding node | 2 | 303 (98) | USD 0.03 |  | 1.4, 1.3, 1.2 |
+| `market/decide/verdict` | Read a node's verdict | 3 | 234 (167) | USD 0.05 | `POST /apply/market/decide/verdict` USD 0.05 | 1.4, 1.3, 1.2 |
+| `market/decide/pricing-power` | Score pricing power | 3 | 291 (228) | USD 0.05 | `POST /apply/market/decide/pricing-power` USD 0.05 | 1.4, 1.3, 1.2 |
+| `market/decide/binding-node` | Find the binding node | 3 | 256 (199) | USD 0.05 | `POST /apply/market/decide/binding-node` USD 0.05 | 1.4, 1.3, 1.2 |
+| `market/decide/rent` | Price the rent over the horizon | 3 | 186 (122) | USD 0.05 | `POST /apply/market/decide/rent` USD 0.05 | 1.4, 1.3, 1.2 |
+| `market/decide/shock` | Transfer a shock to your seat | 3 | 298 (228) | USD 0.05 | `POST /apply/market/decide/shock` USD 0.05 | 1.4, 1.3, 1.2 |
+| `ethics` | Ethics inside the equation: a floor first, then the three terms | 1 | 243 (95) | free |  | 1.4 |
+| `ethics/feasible` | Feasible first: strike, draw the line, seek the middle way, then rank | 2 | 383 (90) | free |  | 1.4 |
+| `ethics/why` | Why conduct belongs inside the equation, and what the link is not | 2 | 273 (88) | USD 0.02 |  | 1.4 |
+| `ethics/risk` | Conduct and r: acceptable risk, consent and the tail | 2 | 233 (80) | USD 0.03 |  | 1.4 |
+| `ethics/cash-flow` | Conduct and CF: trust, disclosure and conflicts of interest | 2 | 209 (91) | USD 0.03 |  | 1.4 |
+| `ethics/growth` | Conduct and g: stewardship, the frame in use and harm outside it | 2 | 200 (91) | USD 0.03 |  | 1.4 |
+| `ethics/decide/safety-concern` | Decide: a safety objection against cost or schedule | 3 | 178 (178) | USD 0.05 |  | 1.4 |
+| `ethics/decide/disclose` | Decide: telling the people who rely on a fact | 3 | 172 (172) | USD 0.05 |  | 1.4 |
 
 ## Bundles
 
