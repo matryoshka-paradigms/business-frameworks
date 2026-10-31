@@ -2,7 +2,7 @@
   "name": "business-frameworks",
   "displayName": "Business Frameworks",
   "icon": "./.claude-plugin/icon.png",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Decision frameworks for value, cash flow, cost of capital, growth and the market (a chain of nodes) in a business under $50M revenue, with an ethics floor tested before options are ranked, by Joseph McHenry. Free top layer; paid nodes $0.02–$0.05 and quoted bundles over x402 (USDC on Base), paid only with the user's approval. No code, hooks or MCP servers; one host.",
   "author": {
     "name": "Joseph McHenry",
@@ -25,6 +25,8 @@
     "supply-chain",
     "market-structure",
     "pricing-power",
-    "ethics"
+    "ethics",
+    "worker",
+    "quality"
   ]
 }
