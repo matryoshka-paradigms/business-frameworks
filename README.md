@@ -8,7 +8,7 @@ Operating judgement for running a business from launch to about $50M in revenue,
 - Endpoint and catalogue: https://business-frameworks.matryoshka-paradigms.workers.dev/catalogue
 - Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.5, `business-frameworks/<handle>@1.5`.
 - Why use it, measured: [`OVERVIEW.md`](OVERVIEW.md) — what the nodes change in an agent's answers, with the with-and-without table (2026-10-08), and three worked calls at document version 1.3: a narrow question, a broad one, and a decision run on the user's figures.
-- Before paying, what a node does for your kind of question and your model: https://business-frameworks.matryoshka-paradigms.workers.dev/fit — the measured rule-right rates, the cost per right answer and the recommended path, with a verdict per decision (`use`, `apply`, `unproven`, `not_measured`); the same block is in every 402.
+- Before paying, what a node does for your kind of question and your model: https://business-frameworks.matryoshka-paradigms.workers.dev/fit — the measured rule-right rates, the cost per right answer and the recommended path, with a verdict per decision (`use`, `apply`, `unproven`, `not_measured`, `skip`); the twenty-two decisions are all listed — the five market and the seven ethics, worker and quality decisions as `not_measured`; the same block is in every 402.
 
 ## What is in this repository
 
@@ -24,7 +24,7 @@ Operating judgement for running a business from launch to about $50M in revenue,
 
 There is no code here: no scripts, hooks, MCP servers or binaries. The skill makes HTTPS requests to one host, `business-frameworks.matryoshka-paradigms.workers.dev`. (The endpoint itself also serves the nodes as an MCP server at `/mcp`, and describes itself at `/llms.txt`, `/.well-known/x402` and `/openapi.json`; the skill needs none of them.)
 
-What the endpoint records: the endpoint keeps a request log: time, method, path, status, duration, user agent, whether a payment header was present, and the payer address and transaction when a call settles — never an IP address, a request body, an applied decision's inputs, or a query string.
+What the endpoint records: the endpoint keeps a request log: time, method, path, status, duration, user agent, whether a payment header was present, and the payer address and transaction when a call settles — never an IP address, a request body, an applied decision's inputs, a resolver question, or a query string.
 
 ## Install
 
@@ -40,7 +40,7 @@ Seventeen nodes are free. Sixty-seven deeper nodes cost $0.02 to $0.05 each, fif
 
 1. Read `SKILL.md`. It is the whole skill.
 2. Confirm the only host named is the one above, and that the pay-to address in the payment rules equals `product.pay_to` in the live catalogue.
-3. Pin a tagged release (`v0.3.0`) if you want the text you reviewed to be the text that runs.
+3. Pin the tagged release you reviewed (this one is `v0.5.1`) if you want the text you reviewed to be the text that runs.
 4. The skill ships no code. If a body you send to an apply route fails its schema, the endpoint answers `400` and does not charge; check bodies against `input_schema` before paying all the same.
 
 ## Limits
@@ -51,6 +51,7 @@ Scope is businesses up to about $50M revenue. This is not legal, tax or investme
 
 ## Changes
 
+- **0.5.1 (2026-10-31)** — a patch from the first outside review of 1.5 (four reviewing models, one blind). No node text changed. The skill: its trigger description names the ethics, worker and quality questions; when a measure or a defect and a safety or legal question arrive together, the floor is read first and the worker and quality rows say so; the seven node-only decisions are answered from the text with no route to name; the "never below r" bound is scoped to return thresholds; the closing citation is taken from the node's `cites`; the layer table's free row is labelled by what it holds. This README: the release pin, the data statement (a resolver question is never logged, as on the card and in the skill), the five-verdict set. Endpoint build 2026.10.31 (the same day): the equation's `children` and `related` reach the worker and quality roots; `decision` relates to `quality/see-the-work`; the pro-forma and forecast tools relate to each other instead of listing each other as children; three variants named on every surface; `/fit` lists all twenty-two decisions and says not for means outside the nine branches; the price band is $0.01–$0.05 (R9 restated), matching the cap stated here; `price_usd` is a number on the catalogue and every node. `server.json` at 2026.10.31.
 - **0.5.0 (2026-10-30)** — document version 1.5 on endpoint build 2026.10.30: two vectors. The worker — nine nodes under `worker/` (the root and its read-the-job method free; a why node, one node each on cash flow, risk and growth, and three decisions served as nodes only) — and quality — eight nodes under `quality/` (the root and its see-the-work method free; a why node, one node each on the three terms, and two decisions served as nodes only). No other node's text changed; three related lists gain a link. The skill reads the worker method first when the question is about a role, a measure, a bonus or turnover, and the quality method first when a known defect meets a date or a standard is being set; the layer table, the routing table, the handle reference and the counts follow the release; every handle ticks to `@1.5` and 1.4 stays readable at `@1.4`. `server.json` at 2026.10.30 for the MCP Registry.
 - **0.4.0 (2026-10-29)** — document version 1.4 on endpoint build 2026.10.29: the ethics vector — eight nodes under `ethics/` (the root and its feasibility method free; a why node, one node each on risk, cash flow and growth, and two decisions served as nodes only) — and one sentence in the equation's honest limit. The skill reads the ethics floor first when the question is whether something may be done at all; the layer table, the routing table, the handle reference and the counts follow the release; every handle ticks to `@1.4` and 1.3 stays readable at `@1.3`. `server.json` at 2026.10.29 for the MCP Registry.
 - **0.3.1 (2026-10-26)** — the author page (https://matryoshkaparadigms.com/author) and the publisher, Matryoshka Paradigms LLC (Oregon), named in this README, `OVERVIEW.md`, `DECISIONS.md`, the skill's metadata and the plugin manifest, so that an agent reading the repository reaches the same author and organization entities as the card, the endpoint and the site. No change to the skill's steps, shapes or payment rules; document version 1.3 and endpoint build 2026.10.22 unchanged.
