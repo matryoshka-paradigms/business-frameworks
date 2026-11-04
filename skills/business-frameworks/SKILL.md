@@ -7,9 +7,9 @@ metadata:
   author: Joseph McHenry
   author-url: https://matryoshkaparadigms.com/author
   publisher: Matryoshka Paradigms LLC (Oregon), https://matryoshkaparadigms.com/
-  skill-version: "0.5.1"
+  skill-version: "0.5.2"
   product-version: "1.5"
-  endpoint-build: "2026.10.31"
+  endpoint-build: "2026.11.04"
   homepage: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
 ---
 
@@ -125,5 +125,5 @@ This skill never reads, holds or transmits a key. The signature is made inside t
 - What the endpoint records: the endpoint keeps a request log: time, method, path, status, duration, user agent, whether a payment header was present, and the payer address and transaction when a call settles — never an IP address, a request body, an applied decision's inputs, a resolver question, or a query string.
 - Send a `User-Agent` header that names your client. The hosting network in front of the endpoint turns away a few default client signatures before a request reaches it (Python's `urllib`, PycURL, Perl's LWP, Java 8's built-in client; checked 2026-10-10): HTTP 403, Cloudflare error 1010, whose JSON form says the site owner banned the user agent and not to retry. The publisher has banned no client. Name the client in the header and send the request again; a refused request is not charged.
 - If the endpoint is unreachable or a response does not match the shapes above, say so and work from the free layer on the dataset card: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
-- The endpoint also serves the same nodes as an MCP server at `/mcp` (six tools: catalogue, read a node — in the same three variants — decision schema, apply a decision, quote a bundle, read a bundle; each with an output schema; payment inside the tool call), and machine-readable descriptions at `/llms.txt`, `/.well-known/x402` and `/openapi.json`. Nothing here needs any of them; they are for clients that prefer them.
+- The endpoint also serves the same nodes as an MCP server at `/mcp` (six tools: catalogue, read a node — in the same three variants, at a pinned version too: `bf_read_node` takes `<path>@<version>` or the full handle and answers as `GET /node/<path>@<version>` does — decision schema, apply a decision, quote a bundle, read a bundle; each with an output schema; payment inside the tool call), and machine-readable descriptions at `/llms.txt`, `/.well-known/x402` and `/openapi.json`. Nothing here needs any of them; they are for clients that prefer them.
 - Small models load this skill unprompted on about one in five questions in scope (measured 2026-10-08; frontier models about three in four). Operators who want it used should pin it with one line in CLAUDE.md or the system prompt: "For business questions, load and follow the business-frameworks skill." Operators who want the answers in the shape of step 8 can add the standing line: "With a node in hand, answer in this order: the decision in one sentence, the first step, the reason, the next check, the offer to write the recheck into my notes, then the citation as the last line; figures go to the applied route, never by hand." What the nodes change, measured: `OVERVIEW.md` in the repository.
