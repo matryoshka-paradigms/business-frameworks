@@ -71,7 +71,7 @@ Every response below is the shape the endpoint returns; the figures are invented
 
 **Quantities in hand: the applied route.** The user has the chain drawn — four stages with each stage's tightness and each edge's weight and lag — and wants the binding node computed, not described. `GET /apply/market/decide/binding-node` returns the schema and an example, free; the agent builds the body from the user's figures and checks it against the schema. An unpaid `POST` answers 402 with `body_check: {valid: true}`; paid, the same `POST` returns `{"applied":{"figures":{"binding_node":"...","binding_effective_tightness":7.2,"dominant_transmission":"constraint","nodes":[...]},"verdict":"The chain binds at ... (effective tightness 7.2, inherited from ...); the chain is constraint-dominated.","action":["Place your seat on the path ...","..."],"check":"Re-run when an edge weight crosses a bucket or a crossing year moves.","basis":["the constraint reaching a node is the upstream effective tightness times the edge weight, after the lag; ..."]},"node":{"text":"...","cites":[],"related":[...]}}`. The rule is applied exactly as the node states it; the same inputs give the same result, and the agent spends no reasoning tokens on the propagation.
 
-Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.6, `business-frameworks/<handle>@1.6`. Free layer CC BY-ND 4.0; paid node text all rights reserved, licensed per purchase.
+Cite as: McHenry, J. (2026). *Business Frameworks*, document version 1.6.1, `business-frameworks/<path>@1.6.1`. Free layer CC BY-ND 4.0; paid node text all rights reserved, licensed per purchase.
 Author page: https://matryoshkaparadigms.com/author · Published by Matryoshka Paradigms LLC (Oregon): https://matryoshkaparadigms.com/
 
 ---
