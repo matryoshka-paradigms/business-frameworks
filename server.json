@@ -3,8 +3,17 @@
   "name": "io.github.matryoshka-paradigms/business-frameworks",
   "title": "Business Frameworks",
   "description": "Operating judgement for businesses under $50M revenue. Free top layer; nodes and bundles over x402.",
-  "version": "2026.10.31",
+  "version": "2026.11.17",
   "websiteUrl": "https://matryoshkaparadigms.com/",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/matryoshka-paradigms/business-frameworks/main/.claude-plugin/icon.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "1024x1024"
+      ]
+    }
+  ],
   "repository": {
     "url": "https://github.com/matryoshka-paradigms/business-frameworks",
     "source": "github"
