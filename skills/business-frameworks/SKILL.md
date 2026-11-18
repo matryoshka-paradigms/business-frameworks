@@ -7,9 +7,9 @@ metadata:
   author: Joseph McHenry
   author-url: https://matryoshkaparadigms.com/author
   publisher: Matryoshka Paradigms LLC (Oregon), https://matryoshkaparadigms.com/
-  skill-version: "0.6.1"
+  skill-version: "0.6.2"
   product-version: "1.6.1"
-  endpoint-build: "2026.11.18"
+  endpoint-build: "2026.11.19"
   homepage: https://huggingface.co/datasets/Matryoshka-Paradigms/business-frameworks
 ---
 
@@ -111,12 +111,12 @@ This skill never reads, holds or transmits a key. The signature is made inside t
 
 ## Shapes
 
-- Node: `GET /node/<path>[?variant=terse|full|agent]` → `{handle, title, layer, tokens, tokens_terse, variant, text, levels{lede, conditions, reasoning} (full only), cites[], children[], related[], versions[], ...}`. A paid node's `402` carries a JSON body: `handle`, `price_usd`, `payment` (the terms), `how_to_pay`, `fit`, `access`; `HEAD` on a paid route also answers `402`. The versioned spelling `/node/<path>@1.6.1` is a paid route of its own; `/node/<path>@1.6`, `/node/<path>@1.5`, `/node/<path>@1.4`, `/node/<path>@1.3`, `/node/<path>@1.2` and `/node/<path>@1.0` return the earlier text of a node that existed then, marked `superseded_by`, at the same price.
+- Node: `GET /node/<path>[?variant=terse|full|agent]` → `{handle, title, layer, tokens, tokens_terse, variant, text, levels{lede, conditions, reasoning} (full only), cites[], children[], related[], versions[], text_since, ...}`. A paid node's `402` carries a JSON body: `handle`, `price_usd`, `payment` (the terms), `how_to_pay`, `text_since`, `fit`, `access`; `HEAD` on a paid route also answers `402`. The versioned spelling `/node/<path>@1.6.1` is a paid route of its own; `/node/<path>@1.6`, `/node/<path>@1.5`, `/node/<path>@1.4`, `/node/<path>@1.3`, `/node/<path>@1.2` and `/node/<path>@1.0` return the earlier text of a node that existed then, marked `superseded_by`, at the same price, with `text_same_as_current` saying whether those words are the current ones. `text_since` is the earliest listed version from which a node's text has not changed: a copy read at that version or later is the current text.
 - Agent variant: `GET /node/<path>?variant=agent` → `{handle, title, variant: "agent", kind, scope{applies_if[], not_for[]}, inputs, rule, action, check, reasoning, units{note, fields{<input>: {type, minimum, maximum, default, description}}, required[]}, example{input, figures, verdict, action[], check, basis[]}, citations[], related[], leads_to[], apply{method, url, schema_url}, free_first[], recheck{cadence, trigger, handle, rerun{method, url, body}}, recheck_note, closing_citation, price_usd, tokens, versions[], cite_as}`. A field the text does not supply is `null`; a non-decision's lede is its `rule`. The same price as `full`.
-- Resolver (free): `GET /resolve` → how it works, the twenty task lines, the chain positions; `POST /resolve` → `{match, by, bundle{id, task, nodes[], price_usd, url, band, apply, free_first, extensions[]}}` or `{match: "candidates", candidates[]}` or `{match: "none", tasks[], free[]}`.
+- Resolver (free): `GET /resolve` → how it works, the twenty task lines, the chain positions; `POST /resolve` → `{match, by, bundle{id, task, nodes[], price_usd, url, band, apply, free_first, extensions[]}}` or `{match: "candidates", candidates[]}` or `{match: "none", tasks[], free[]}`, which adds `vector` and `free_first[]` when the question belongs to a branch no bundle covers: read `free_first` before anything is bought.
 - Bundle (paid): `GET /bundle/<id>[/band/<slug>]` → `402` at USD 0.05 with the nodes listed; on payment `{handle, id, task, price_usd, nodes[{handle, variant, role, text, cites[], cite_as}], apply, next[], also[], cite_as}`.
 - Fit (free): `GET /fit` → the table; `GET /fit?decision=<decision-path>&model=<name>` → the block for one decision with the verdict for that model.
-- Apply schema (free): `GET /apply/<decision-path>` → `{handle, summary, price_usd, input_schema, example_input, units, related[], fit, ...}`. An unpaid `POST` with a body answers `402` with `body_check` — whether that body would be accepted — so a bad body is found before anything is paid.
+- Apply schema (free): `GET /apply/<decision-path>` → `{handle, summary, price_usd, input_schema, example_input, returns{figures[]}, units, related[{handle, rel, when, price_usd}], fit, ...}`: `returns.figures` names the figures the rule computes for the example input, and a `related` entry with `rel: "crossing"` is a node on another term or vector that the decision's action moves, with the situation in which to read it. An unpaid `POST` with a body answers `402` with `body_check` — whether that body would be accepted — so a bad body is found before anything is paid.
 - Applied decision (paid): `POST /apply/<decision-path>` with a JSON body → `{handle, applied: {figures, verdict, action[], check, basis[]}, node: {text, cites[], related[]}}`. The rule is applied exactly as the node states it; no model sits between the inputs and the answer, so the same inputs give the same result.
 
 ## Using what comes back
