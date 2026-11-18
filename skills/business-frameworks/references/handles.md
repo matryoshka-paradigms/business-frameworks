@@ -1,6 +1,6 @@
 # Handles — Business Frameworks, document version 1.6.1
 
-Copied from `GET /catalogue` of endpoint build 2026.11.18 on 2026-11-17. The live catalogue is the authority on handles, token counts, prices and bundles; if this file and the catalogue differ, the catalogue is right. All handles are prefixed `business-frameworks/` and carry `@1.6.1`; the 154 nodes of 1.6 also answer at `@1.6`, the 84 of 1.5 at `@1.5`, the 67 of 1.4 at `@1.4`, the 59 of 1.3 at `@1.3` and `@1.2`, each with that version's text, and the 32 marked 1.0 at `@1.0` as well. Fifteen of the 62 decisions have an apply route; the other 47, and the 14 methods written in the decision shape, are served as nodes only.
+Copied from `GET /catalogue` of endpoint build 2026.11.18 on 2026-11-17 (handles, tokens, prices and versions unchanged at endpoint build 2026.11.19). The live catalogue is the authority on handles, token counts, prices and bundles; if this file and the catalogue differ, the catalogue is right. All handles are prefixed `business-frameworks/` and carry `@1.6.1`; the 154 nodes of 1.6 also answer at `@1.6`, the 84 of 1.5 at `@1.5`, the 67 of 1.4 at `@1.4`, the 59 of 1.3 at `@1.3` and `@1.2`, each with that version's text, and the 32 marked 1.0 at `@1.0` as well. Fifteen of the 62 decisions have an apply route; the other 47, and the 14 methods written in the decision shape, are served as nodes only.
 
 | Path | Title | Layer | Tokens (terse) | Price | Apply route | Versions |
 |---|---|---|---|---|---|---|
